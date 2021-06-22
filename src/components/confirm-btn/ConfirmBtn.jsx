@@ -2,9 +2,7 @@ import './ConfirmBtn.scss';
 
 const ConfirmBtn = () => {
   return (
-    <div className="">
-
-    </div>
+    <button className="quiz__next-btn">Confirm</button>
   );
 }
 

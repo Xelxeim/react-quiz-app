@@ -1,10 +1,10 @@
 import './AnswerItem.scss';
 
-const AnswerItem = () => {
+const AnswerItem = ({ value }) => {
   return (
-    <div className="">
-
-    </div>
+    <div className="quiz__answer-item">
+      {value}
+    </div>  
   );
 }
 
