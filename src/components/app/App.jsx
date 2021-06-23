@@ -11,9 +11,11 @@ import apiInteractor from "../../services/api-interactor";
 import './App.scss';
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [currentNumber, setCurrentNumber] = useState(1);
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState([]),
+    [currentNumber, setCurrentNumber] = useState(0),
+    [loading, setLoading] = useState(true),
+    [userAnswers, setUserAnswers] = useState([]),
+    [results, setResults] = useState({})
 
   useEffect(() => { 
     apiInteractor.getData("https://opentdb.com/api.php?amount=10")
@@ -21,23 +23,35 @@ const App = () => {
       .finally(setLoading(false))
   }, [])
 
-  console.log(data);
+  const addAnswer = (answer) => {
+    const answers = [...userAnswers];
+    answers.push(answer);
+    setUserAnswers(answers);
+  }
+
+  const confirmQuestion = () => {
+    if (currentNumber < data.length - 1) {
+      setCurrentNumber(currentNumber + 1)
+    } else {
+      // results
+    } 
+  }
+
   const renderedContent = () => {
     if (!data[currentNumber]) return <Spinner />;
-    const currentQuestion = data[currentNumber-1];
+    const currentQuestion = data[currentNumber];
     const { question, difficulty, type } = currentQuestion;
     const correctAnswer = currentQuestion.correct_answer,
       incorrectAnswers = currentQuestion.incorrect_answers
     return(
       <>
-        <Counter currentNumber={currentNumber} amount={data.length} />
+        <Counter currentNumber={currentNumber + 1} amount={data.length} />
         <Question question={question} difficulty={difficulty} type={type} />
-        <AnswerList correctAnswer={correctAnswer} incorrectAnswers={incorrectAnswers} />
-        <ConfirmBtn />
+        <AnswerList correctAnswer={correctAnswer} incorrectAnswers={incorrectAnswers} type={type} currentNumber={currentNumber} addAnswer={addAnswer} />
+        <ConfirmBtn clickHandler={confirmQuestion} />
       </>
     )
   };
-
 
   return (
     <div className="App">

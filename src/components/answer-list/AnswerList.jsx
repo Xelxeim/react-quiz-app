@@ -2,7 +2,7 @@ import AnswerItem from "../answer-item";
 
 import './AnswerList.scss';
 
-const AnswerList = ({correctAnswer, incorrectAnswers}) => {
+const AnswerList = ({ correctAnswer, incorrectAnswers, type, currentNumber, addAnswer }) => {
   const shuffle = (array) => {
     array.sort(() => Math.round(Math.random() * 100) - 50);
   }
@@ -12,7 +12,7 @@ const AnswerList = ({correctAnswer, incorrectAnswers}) => {
 
   return (
     <div className="quiz__answer-list">
-      {allAnswers.map(item => <AnswerItem key={item} value = {item}/>)}
+      {allAnswers.map((item, index) => <AnswerItem key={index} value={item} type={type} currentNumber={currentNumber} addAnswer={addAnswer} />)}
     </div>
   );
 }

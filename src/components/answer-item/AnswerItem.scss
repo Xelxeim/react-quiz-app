@@ -7,6 +7,12 @@
   box-shadow: 0 4px 4px 0 rgba(252, 252, 252, 0.925), 0 3px 5px 0 rgb(161, 108, 108);
 }
 
+.btn-element {
+  margin-right: 1rem;
+  transform:scale(1.7);
+  opacity:0.9;
+  cursor:pointer;
+}
 
 @media (max-width: 568px) {
   .quiz__answer-item {

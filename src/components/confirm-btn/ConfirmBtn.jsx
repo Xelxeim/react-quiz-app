@@ -1,8 +1,9 @@
 import './ConfirmBtn.scss';
 
-const ConfirmBtn = () => {
+const ConfirmBtn = ({ clickHandler }) => {
+
   return (
-    <button className="quiz__next-btn">Confirm</button>
+    <button onClick={clickHandler} className="quiz__next-btn">Confirm</button>
   );
 }
 
