@@ -1,9 +1,9 @@
 import './Counter.scss';
 
-const Counter = () => {
+const Counter = ({ currentNumber, amount }) => {
   return (
     <div className="quiz__counter">
-      <p>Question 1 of 10</p>
+      <p>Question {currentNumber} of {amount}</p>
     </div>
   );
 }

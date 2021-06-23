@@ -1,14 +1,14 @@
 import './Question.scss';
 
-const Question = () => {
+const Question = ({ question, difficulty, type }) => {
   return (
     <>
       <div className="quiz__question">
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eligendi praesentium officiis voluptatibus ipsa consectetur unde eveniet totam sint est, asperiores vel cumque corrupti non odio minus! Explicabo cum esse fuga?</p>
+        <p>{question}</p>
       </div>
       <div className="quiz__description">
-        <span className="quiz__description-item">Difficulty: Easy</span>
-        <span className="quiz__description-item">Number of answers: One or few answers</span>
+        <span className="quiz__description-item">Difficulty: {difficulty}</span>
+        <span className="quiz__description-item">Number of answers: {type === "boolean" ? "One answer" : "One or few answers"}</span>
       </div>
     </>
   );
