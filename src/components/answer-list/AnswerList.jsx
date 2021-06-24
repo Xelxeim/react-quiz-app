@@ -1,28 +1,18 @@
 import { useEffect, useState } from "react";
 import AnswerItem from "../answer-item";
 
+import functions from "../../services/functions";
+
 import './AnswerList.scss';
 
 const AnswerList = ({ correctAnswer, incorrectAnswers, type, currentNumber, onChangeHandler }) => {
   const [userAnswers, setUserAnswers] = useState([]);
-  const shuffle = (array) => {
-    array.sort(() => Math.round(Math.random() * 100) - 50);
-    return array;
-  }
-
-  const dropCheckboxes = () => {
-    
-    const checkboxes = document.getElementsByClassName("btn-element");
-    for (let item of checkboxes) {
-      item.checked = false;
-    }
-  }
-
   const allAnswers = [...incorrectAnswers, correctAnswer];
+
   useEffect(() => {
-    shuffle(allAnswers);
+    functions.shuffle(allAnswers);
     setUserAnswers(allAnswers);
-    dropCheckboxes();
+    functions.dropCheckboxes("btn-element");
   }, [currentNumber])
 
   return (

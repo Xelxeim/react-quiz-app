@@ -1,0 +1,16 @@
+.quiz__results {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.quiz__list {
+  padding-left: 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  &-item {
+    list-style-type: none; 
+  }
+}
