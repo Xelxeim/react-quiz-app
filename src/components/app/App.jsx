@@ -14,7 +14,7 @@ const App = () => {
   const [data, setData] = useState([]),
     [currentNumber, setCurrentNumber] = useState(0),
     [loading, setLoading] = useState(true),
-    [userAnswers, setUserAnswers] = useState([]),
+    [userAnswers, setUserAnswers] = useState({}),
     [results, setResults] = useState({})
 
   useEffect(() => { 
@@ -23,18 +23,31 @@ const App = () => {
       .finally(setLoading(false))
   }, [])
 
-  const addAnswer = (answer) => {
-    const answers = [...userAnswers];
-    answers.push(answer);
-    setUserAnswers(answers);
-  }
-
   const confirmQuestion = () => {
     if (currentNumber < data.length - 1) {
       setCurrentNumber(currentNumber + 1)
+      setUserAnswers({})
     } else {
       // results
     } 
+  }
+
+  const onChangeHandler = (e, type) => {
+    const { id, checked } = e.target;
+    switch (type) {
+      case "multiple":
+        setUserAnswers({
+          ...userAnswers,
+          [id]: checked 
+        });
+        break;
+      case "boolean":
+        setUserAnswers({
+          [id]: checked 
+        });
+        break;
+      default: break;
+    }
   }
 
   const renderedContent = () => {
@@ -47,7 +60,7 @@ const App = () => {
       <>
         <Counter currentNumber={currentNumber + 1} amount={data.length} />
         <Question question={question} difficulty={difficulty} type={type} />
-        <AnswerList correctAnswer={correctAnswer} incorrectAnswers={incorrectAnswers} type={type} currentNumber={currentNumber} addAnswer={addAnswer} />
+        <AnswerList correctAnswer={correctAnswer} incorrectAnswers={incorrectAnswers} type={type} currentNumber={currentNumber} onChangeHandler={onChangeHandler} />
         <ConfirmBtn clickHandler={confirmQuestion} />
       </>
     )
